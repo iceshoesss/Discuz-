@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  discuz:
+    image: tencentci/discuz
+    container_name: discuz
+    volumes:
+      - ~/discuzs/var/www/html:/var/www/html
+    ports:
+      - 16335:8888
+    depends_on:
+      - mysql
+
+  mysql:
+      image: mysql:5.7
+      container_name: mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=123456
+        - MYSQL_DATABASE=discuzDB
+      volumes:
+        - ~/mysql/conf:/etc/mysql
+        - ~/mysql/logs:/logs
+        - ~/mysql/data:/var/lib/mysql
